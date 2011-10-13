@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">The Rainy Method for Concentration</string>
+    <string name="app_name">Get Focused</string>
+    <string name="rain_now">Get Focused</string>
+    <string name="methodSubTitle">Getting distracted while trying to get things done? Here goes what you gotta do:</string>
+    <string name="methodTitle">The Method</string>
+    <string name="headPhonesStep1">1. Put your headphones on</string>
+    <string name="clickToRain">2. Click play to rain down</string>
+    <string name="getItDone">3. Go get it done!</string>
+    <string name="naturalSounds">The natural music of the rain and thunders are going to relax you. The sustained sound will make you forget the environment surrounding you. Now it\'s only you and your duties. Good Luck!</string>
+    <string name="author">Author</string>
+    <string name="credits">Credits</string>
+    <string name="creditsText">The sounds are a modified version of a file provided by RHumphires &amp; Reinsamba under Creative Commons License.</string>
+    <string name="aboutMethod">About the Method</string>
+    <string name="getFocusedApp">Get Focused 1.0</string>
+    <string name="aboutApp">&quot;Get Focused 1.0 © 2011. This software is provided \&quot;as-is,\&quot; without any express or implied warranty. In no event shall the author be held liable for any damages arising from the use of this software. Official website: http://getFocused.in. &quot;</string>
+</resources>
