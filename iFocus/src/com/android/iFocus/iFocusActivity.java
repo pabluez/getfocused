@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
+
 import com.insightoverflow.iFocus.R;
 
 public class iFocusActivity extends Activity implements OnClickListener {
@@ -18,6 +19,7 @@ public class iFocusActivity extends Activity implements OnClickListener {
 	
     //Declare Controls
 	public int count = 0;
+	public int x = 1;
     MediaPlayer mediaPlayer = null;
     ToggleButton toggleRain = null;
     Button buttonAbout = null;
@@ -41,7 +43,14 @@ public class iFocusActivity extends Activity implements OnClickListener {
         
 
         // init player
-        mediaPlayer = MediaPlayer.create(this, R.raw.rain);
+
+    	try {
+        	mediaPlayer = MediaPlayer.create(this, Uri.parse("http://vprbbc.streamguys.net:80/vprbbc24.mp3"));
+        	x=2;
+        } catch(Exception e){
+        	x=3;
+        }
+
         
         //Define Listeners (click event handler)
         toggleRain.setOnClickListener(this);
@@ -69,8 +78,10 @@ public class iFocusActivity extends Activity implements OnClickListener {
                 }
 
         		if(count==0){
-        			mediaPlayer.setLooping(true);
-        			mediaPlayer.start();
+        			   mediaPlayer.start();
+        			 
+        			//mediaPlayer.setLooping(true);
+        			//mediaPlayer.start();
         			count = 1;
         		} else {
         			mediaPlayer.pause();
