@@ -2,8 +2,11 @@ package com.android.iFocus;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +29,31 @@ public class iFocusActivity extends Activity implements OnClickListener {
     Button buttonMethod = null;
     Button buttonLink = null;
     
+    
+    public boolean isOnline() {
+    	//Check if internet is connected
+    	ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    	NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+    	return activeNetworkInfo != null;
+  
+    }
+    
+    public void prepareStream(){
+    	if(isOnline()){
+    		// init player
+        	try {
+            	mediaPlayer = MediaPlayer.create(this, Uri.parse("http://vprbbc.streamguys.net:80/vprbbc24.mp3"));
+            	x=2;
+           //if any exception occur	
+            } catch(Exception e){
+            	//x=3 means that "notconnectedbutton" is gonna be shown
+            	x=3;
+            }
+    	} else {
+    		x=3;
+    	}
+    }
+    
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,23 +62,12 @@ public class iFocusActivity extends Activity implements OnClickListener {
         setContentView(R.layout.main);
         
         
-        
         // load controls
         toggleRain = (ToggleButton)findViewById(R.id.toggleRain);
         buttonAbout = (Button)findViewById(R.id.buttonAbout);
         buttonMethod = (Button)findViewById(R.id.buttonMethod);
         buttonLink = (Button)findViewById(R.id.buttonLink);
         
-
-        // init player
-
-    	try {
-        	mediaPlayer = MediaPlayer.create(this, Uri.parse("http://vprbbc.streamguys.net:80/vprbbc24.mp3"));
-        	x=2;
-        } catch(Exception e){
-        	x=3;
-        }
-
         
         //Define Listeners (click event handler)
         toggleRain.setOnClickListener(this);
@@ -62,6 +79,11 @@ public class iFocusActivity extends Activity implements OnClickListener {
         // init state for player
         count = 0;
         
+        
+        if (!isOnline()){
+        	toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.notconnectedbutton));
+        	x=3;
+        }
      
     }
     
@@ -73,21 +95,38 @@ public class iFocusActivity extends Activity implements OnClickListener {
         
             	if (((CompoundButton) toggleRain).isChecked()) {
                     toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.stopbutton));
+                } else if (x==3){
+                    toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.notconnectedbutton));
                 } else {
-                    toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.playbutton));
+                	toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.playbutton));
                 }
 
-        		if(count==0){
-        			   mediaPlayer.start();
-        			 
-        			//mediaPlayer.setLooping(true);
-        			//mediaPlayer.start();
-        			count = 1;
-        		} else {
-        			mediaPlayer.pause();
-        			count = 0;
-        		}
+            	if (x==3){
+            		if (isOnline()){
+            			if(count==0){
+                			
+                			prepareStream();
+                			mediaPlayer.start();
+                			count = 1;
+                		} else {
+                			mediaPlayer.pause();
+                			count = 0;
+                		}
+            			
+            		}
+            	} else {
+            		if(count==0){
+            			
+            			prepareStream();
+            			mediaPlayer.start();
+            			count = 1;
+            		} else {
+            			mediaPlayer.pause();
+            			count = 0;
+            		}
 
+            	}
+        		
             	
             }
             else if( buttonAbout.getId() == ((Button)v).getId() ){
