@@ -162,6 +162,7 @@ public class iFocusActivity extends Activity implements OnClickListener {
 				mediaPlayer.release();
 				Log.d(TAG, "setting count = 0");
     			count=0;
+    			mediaPlayer = null;
 			}
         }
         	
