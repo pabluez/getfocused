@@ -87,21 +87,17 @@ public class iFocusActivity extends Activity implements OnClickListener {
         if( toggleRain.getId() == ((Button)v).getId() ){
     
         	if (!isOnline()){
-                //meanwhile device is offline, do this
-                do {
-                    toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.notconnectedbutton));
-                    try{
-                    	  Thread.currentThread();
-    					//do what you want to do before sleeping
-                    	  Thread.sleep(3000);//sleep for 1000 ms
-                    	  //do what you want to do after sleeptig
-                    } catch(Exception ie){}
-                    
-                    continue;
-                }while (!isOnline());
-
+        		Log.d(TAG, "DEVICE NOT CONNECTED");
+                
+                
+                Log.d(TAG, "Setting background notconnectedbutton");
+                toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.notconnectedbutton));
+                toggleRain.setChecked(false);
+                
+                
         	} else {
-            
+                    		
+        		
 	            //If device is online, go for this
 	        	if (((CompoundButton) toggleRain).isChecked()) {
 	                toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.stopbutton));
@@ -150,11 +146,16 @@ public class iFocusActivity extends Activity implements OnClickListener {
         	    		    	
             				} catch (Exception e){
             					x=3;
+            					count=0;
             				}
             				
             			}
             		}.start();
         			
+            		if (x==3){
+            			toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.notconnectedbutton));
+    	                toggleRain.setChecked(false);
+            		}
         	} else {
 				Log.d(TAG, "Pausing mediaplayer");
 				mediaPlayer.pause();
@@ -162,6 +163,7 @@ public class iFocusActivity extends Activity implements OnClickListener {
 				mediaPlayer.release();
 				Log.d(TAG, "setting count = 0");
     			count=0;
+    			
     			mediaPlayer = null;
 			}
         }
