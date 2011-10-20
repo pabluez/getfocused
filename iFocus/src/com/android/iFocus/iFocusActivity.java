@@ -43,38 +43,7 @@ public class iFocusActivity extends Activity implements OnClickListener {
   
     }
     
-/*    public void prepareStream(final Context context){
-    	if(isOnline()){
-    		// init player
-    		
-    		
-    		new Thread() 
-    		{
-    			public void run() 
-    			{
 
-    				try {
-    					
-    					sleep(1500);
-        				//progressDialog.show();
-	    		    	mediaPlayer = MediaPlayer.create(context, Uri.parse("http://vprbbc.streamguys.net:80/vprbbc24.mp3"), null);
-	                	x=2;
-	
-    				} catch (Exception e){
-    		    	x=3;
-    				}
-    				
-    			//dismiss the progressdialog   
-    			progressDialog.dismiss();
-    			}
-    		}.start();
-    		
-    
-    	} else {
-    		x=3;
-    	}
-		
-    }*/
     
 	/** Called when the activity is first created. */
     @Override
@@ -117,68 +86,67 @@ public class iFocusActivity extends Activity implements OnClickListener {
     	
         if( toggleRain.getId() == ((Button)v).getId() ){
     
-            //meanwhile device is offline, do this
-            do {
-                toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.notconnectedbutton));
-                try{
-                	  Thread.currentThread();
-					//do what you want to do before sleeping
-                	  Thread.sleep(1000);//sleep for 1000 ms
-                	  //do what you want to do after sleeptig
-                } catch(Exception ie){}
-                
-                continue;
-            }while (!isOnline());
-            
-            //If device is online, go for this
-        	if (((CompoundButton) toggleRain).isChecked()) {
-                toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.stopbutton));
-            } else {
-            	toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.playbutton));
-            }
+        	if (!isOnline()){
+                //meanwhile device is offline, do this
+                do {
+                    toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.notconnectedbutton));
+                    try{
+                    	  Thread.currentThread();
+    					//do what you want to do before sleeping
+                    	  Thread.sleep(3000);//sleep for 1000 ms
+                    	  //do what you want to do after sleeptig
+                    } catch(Exception ie){}
+                    
+                    continue;
+                }while (!isOnline());
 
-        	final Context context = v.getContext();
+        	} else {
+            
+	            //If device is online, go for this
+	        	if (((CompoundButton) toggleRain).isChecked()) {
+	                toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.stopbutton));
+	            } else {
+	            	toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.playbutton));
+	            }
+
+	        	final Context context = v.getContext();
         	
-    		if (isOnline()){
+    
     			//If music is not playing, start music
     			if(count==0){
     				
     				Log.d(TAG, "START PROGRESS DIALOG");
     				
     				//Showing progressDialog
-    				final ProgressDialog progressDialog = ProgressDialog.show(v.getContext(), "Load", "Loading...");
-    				progressDialog.show();
+    				progressDialog = ProgressDialog.show(v.getContext(), "Load", "Loading...");
+    				
     				
     				//progressDialog = ProgressDialog.show(, "Load", "Loading...", true, false);
     				Log.d(TAG, "END PROGRESS DIALOG");
+    				
+    				
     				Log.d(TAG, "START THREAD TO PLAY STREAM");
-        			
-        		
-    			}
-        			
         	   		new Thread() 
             		{
             			public void run() 
             			{
 
             				try {
-            					
-            					if (count==0){
-            						final MediaPlayer mediaPlayer = MediaPlayer.create(context, Uri.parse("http://vprbbc.streamguys.net:80/vprbbc24.mp3"), null);
+            						
+            						Log.d(TAG, "START MEDIA PLAYER LOADING");
+            						mediaPlayer = MediaPlayer.create(context, Uri.parse("http://vprbbc.streamguys.net:80/vprbbc24.mp3"), null);
+            						Log.d(TAG, "SETTING X = 2");
             	                	x=2;
             	
+            	                	Log.d(TAG, "DISMISSING PROGRESS DIALOG");
             	                	progressDialog.dismiss();
             	                	
             	                	Log.d(TAG, "START MEDIA PLAYER START");
             	                	mediaPlayer.start();
-            	                	Log.d(TAG, "END MEDIA PLAYER START");
             	                	
+            	                	Log.d(TAG, "Setting count = 1");
             	                	count=1;
             						
-            					} else {
-            						mediaPlayer.pause();
-            	        			count = 0;
-            					}
         	    		    	
             				} catch (Exception e){
             					x=3;
@@ -187,7 +155,15 @@ public class iFocusActivity extends Activity implements OnClickListener {
             			}
             		}.start();
         			
-        	}         		
+        	} else {
+				Log.d(TAG, "Pausing mediaplayer");
+				mediaPlayer.pause();
+				Log.d(TAG, "Releasing mediaplayer");
+				mediaPlayer.release();
+				Log.d(TAG, "setting count = 0");
+    			count=0;
+			}
+        }
         	
     } else if( buttonAbout.getId() == ((Button)v).getId() ){
 
