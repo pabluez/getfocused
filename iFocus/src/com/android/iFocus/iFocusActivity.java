@@ -130,13 +130,14 @@ public class iFocusActivity extends Activity implements OnClickListener {
             				try {
             						
             						Log.d(TAG, "START MEDIA PLAYER LOADING");
-            						mediaPlayer = MediaPlayer.create(context, Uri.parse("http://vprbbc.streamguys.net:80/vprbbc24.mp3"), null);
+            						mediaPlayer = MediaPlayer.create(context, Uri.parse("http://k003.kiwi6.com/hotlink/61rara4499/rain.mp3"), null);
             						Log.d(TAG, "SETTING X = 2");
             	                	x=2;
             	
             	                	Log.d(TAG, "DISMISSING PROGRESS DIALOG");
             	                	progressDialog.dismiss();
             	                	
+            	                	mediaPlayer.setLooping(true);
             	                	Log.d(TAG, "START MEDIA PLAYER START");
             	                	mediaPlayer.start();
             	                	

@@ -15,4 +15,7 @@
     <string name="aboutMethod">About the Method</string>
     <string name="getFocusedApp">Get Focused 1.0</string>
     <string name="aboutApp">&quot;Get Focused 1.0 © 2011. This software is provided \&quot;as-is,\&quot; without any express or implied warranty. In no event shall the author be held liable for any damages arising from the use of this software. Official website: http://getFocused.in. &quot;</string>
+    <string name="offlineVersion">Offline Version</string>
+    <string name="theMethodTextButton">The Method</string>
+    <string name="aboutButtonText">About</string>
 </resources>
