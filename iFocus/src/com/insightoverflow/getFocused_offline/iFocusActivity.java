@@ -1,17 +1,17 @@
-package com.android.iFocus;
+package com.insightoverflow.getFocused_offline;
 
 
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
-import com.insightoverflow.iFocus.R;
+
+import com.insightoverflow.getFocused_offline.R;
 
 public class iFocusActivity extends Activity implements OnClickListener {
 	
@@ -22,7 +22,6 @@ public class iFocusActivity extends Activity implements OnClickListener {
     ToggleButton toggleRain = null;
     Button buttonAbout = null;
     Button buttonMethod = null;
-    Button buttonLink = null;
     
 	/** Called when the activity is first created. */
     @Override
@@ -37,7 +36,7 @@ public class iFocusActivity extends Activity implements OnClickListener {
         toggleRain = (ToggleButton)findViewById(R.id.toggleRain);
         buttonAbout = (Button)findViewById(R.id.buttonAbout);
         buttonMethod = (Button)findViewById(R.id.buttonMethod);
-        buttonLink = (Button)findViewById(R.id.buttonLink);
+        
         
 
         // init player
@@ -47,7 +46,6 @@ public class iFocusActivity extends Activity implements OnClickListener {
         toggleRain.setOnClickListener(this);
         buttonAbout.setOnClickListener(this);
         buttonMethod.setOnClickListener(this);
-        buttonLink.setOnClickListener(this);
         
         
         // init state for player
@@ -92,13 +90,6 @@ public class iFocusActivity extends Activity implements OnClickListener {
             	startActivity(o);
             }
             
-            else if ( buttonLink.getId() == ((Button)v).getId() ){
-            	
-            	Uri uri = Uri.parse( "http://getFocused.in" );
-    			startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
-            }
-
-       
         }
       
     @Override

@@ -112,13 +112,6 @@
             android:layout_height="40dp"
             android:text="@string/aboutMethod" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="http://getFocused.in"
-            android:textAppearance="?android:attr/textAppearanceMedium" android:textSize="10sp"/>
-
     </LinearLayout>
     
 </LinearLayout>

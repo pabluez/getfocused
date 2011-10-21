@@ -1,8 +1,8 @@
-package com.android.iFocus;
+package com.insightoverflow.getFocused_offline;
 
 import android.app.Activity;
 import android.os.Bundle;
-import com.insightoverflow.iFocus.R;
+import com.insightoverflow.getFocused_offline.R;
 
 public class MethodActivity extends Activity {
 	
