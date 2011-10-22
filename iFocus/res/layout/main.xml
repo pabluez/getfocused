@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" android:orientation="vertical" android:weightSum="1" android:background="@drawable/wall">
+    android:layout_height="fill_parent"
+    android:background="@drawable/wall"
+    android:orientation="vertical"
+    android:weightSum="1" >
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
 
         <TextView
@@ -33,15 +36,15 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingBottom="10dp"
+                android:paddingBottom="3dp"
                 android:text="@string/rain_now"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="50sp" />
 
             <ToggleButton
                 android:id="@+id/toggleRain"
-                android:layout_width="161dp"
-                android:layout_height="161dp"
+                android:layout_width="131dp"
+                android:layout_height="131dp"
                 android:background="@drawable/playbutton"
                 android:checked="false"
                 android:gravity="center"

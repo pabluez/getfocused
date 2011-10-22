@@ -2,10 +2,12 @@ package com.android.iFocus;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
 import com.insightoverflow.iFocus.R;
 
 public class AboutActivity extends Activity implements OnClickListener {
@@ -23,8 +25,9 @@ public class AboutActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View buttonAbout) {
-		Intent o = new Intent(AboutActivity.this, MethodActivity.class);
-    	startActivity(o);
+	   	Intent intent = new Intent(Intent.ACTION_VIEW);
+    	intent.setData(Uri.parse("market://details?id=com.insightoverflow.getFocused_offline"));
+    	startActivity(intent);
 	}
 
 }

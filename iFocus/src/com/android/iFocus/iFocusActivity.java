@@ -15,14 +15,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.ToggleButton;
-
 import com.insightoverflow.iFocus.R;
+import com.google.ads.*;
 
 public class iFocusActivity extends Activity implements OnClickListener {
 	
 	
     //Declare Controls
+	private AdView adView;
 	public int count = 0;
 	public int x = 1;
     public MediaPlayer mediaPlayer = null;
@@ -30,6 +32,7 @@ public class iFocusActivity extends Activity implements OnClickListener {
     Button buttonAbout = null;
     Button buttonMethod = null;
     Button buttonLink = null;
+    LinearLayout layout = null;
     public ProgressDialog progressDialog;
     public static final String TAG = "getFocused";
 
@@ -77,6 +80,19 @@ public class iFocusActivity extends Activity implements OnClickListener {
         	toggleRain.setBackgroundDrawable(getResources().getDrawable(R.drawable.notconnectedbutton));
         	x=3;
         }
+        
+        // Create the adView
+        adView = new AdView(this, AdSize.BANNER, "a14ea1d7cd1dc0a");
+
+        // Lookup your LinearLayout assuming it’s been given
+        // the attribute android:id="@+id/mainLayout"
+        LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayout3);
+
+        // Add the adView to it
+        layout.addView(adView);
+
+        // Initiate a generic request to load it with an ad
+        adView.loadAd(new AdRequest());
      
     }
     
@@ -184,8 +200,9 @@ public class iFocusActivity extends Activity implements OnClickListener {
     
     else if ( buttonLink.getId() == ((Button)v).getId() ){
     	
-    	Uri uri = Uri.parse( "http://getFocused.in" );
-		startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
+    	Intent intent = new Intent(Intent.ACTION_VIEW);
+    	intent.setData(Uri.parse("market://details?id=com.insightoverflow.getFocused_offline"));
+    	startActivity(intent);
     }
 
    
@@ -194,6 +211,7 @@ public class iFocusActivity extends Activity implements OnClickListener {
 
 	@Override
     protected void onDestroy() {
+	    adView.destroy();
     	super.onDestroy();
     	if(mediaPlayer != null) {
     		mediaPlayer.stop();
